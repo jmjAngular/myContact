@@ -1,7 +1,9 @@
-## ignoring compiled script 
+## ignoring compiled script
 
 app.component.js
 app.component.js.map
 
 main.js
 main.js.map
+contact.js
+contact.js.map

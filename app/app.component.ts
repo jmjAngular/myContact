@@ -1,10 +1,7 @@
 import {Component} from '@angular/core';
+import {Contact} from './contact';
 
-export class Contact {
-    mobile:number;
-    name:string;
 
-}
 const CONTACTS:Contact[] = [
     {mobile: 454567, name: "jomon"},
     {mobile: 768874, name: "Sijo"},
@@ -33,9 +30,8 @@ const CONTACTS:Contact[] = [
         <td>1</td>
         <td>{{contact.mobile}}</td>
         <td>{{contact.name}}</td>
-        <td   [class.selected]="contact === selectedContact"
-        (click)="onSelect(contact)" >
-         <button type="button" class="btn btn-default btn-xs"><i class="badge">EDIT</i> </button>
+        <td   [class.selected]="contact === selectedContact"  >
+         <button   (click)="onSelect(contact)" type="button" class="btn btn-default btn-xs"><i class="badge">EDIT</i> </button>
          </td>
     </tr>
     </tbody>
@@ -45,15 +41,16 @@ const CONTACTS:Contact[] = [
 <div *ngIf="selectedContact">
       <h2>{{selectedContact.name}} details!</h2>
       <div>
-        <label>Mobile: </label>
-        <input [(ngModel)]="selectedContact.mobile" placeholder="mobile"/>
-          <label>name: </label>
-        <input [(ngModel)]="selectedContact.name" placeholder="name"/>
+       
+         <label>name: </label><br>
+        <input [(ngModel)]="selectedContact.name" placeholder="name"/><br/> 
+         <label>Mobile: (Press [Enter] to update details)</label><br>
+        <input #number_box   (keyup.enter)="selectedContact.mobile=number_box.value" value="{{selectedContact.mobile}}"  placeholder="mobile"/>
+         
       </div>
     </div>
     
     `
-
 })
 export class AppComponent {
     title = "My Contact";
