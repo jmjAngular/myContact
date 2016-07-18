@@ -16,6 +16,11 @@ const CONTACTS:Contact[] = [
     selector: 'my-app',
     template: `
 <h2>{{title}}</h2>
+<input #newContact
+      (keyup.enter)="addContact(newContact.value)"
+      (blur)="addContact(newContact.value); newContact.value='' ">
+    <button (click)=addContact(newContact.value)>Add</button>
+    
 <table class="table table-hover">
     <thead>
     <tr>
@@ -26,8 +31,8 @@ const CONTACTS:Contact[] = [
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let contact of contacts">
-        <td>1</td>
+    <tr *ngFor="let contact of contacts;let i = index">
+        <td>{{i+1}}</td>
         <td>{{contact.mobile}}</td>
         <td>{{contact.name}}</td>
         <td   [class.selected]="contact === selectedContact"  >
@@ -60,6 +65,11 @@ export class AppComponent {
     onSelect(contact:Contact) {
         this.selectedContact = contact;
         console.log(contact);
+    }
+
+    addContact(newName:string) {
+        var mobile = Math.floor(Math.random() * 100000);
+        this.contacts.push({mobile: mobile, name: newName});
     }
 }
 
