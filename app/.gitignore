@@ -1,0 +1,4 @@
+## ignoring compiled script
+
+*.js
+*.js.map
